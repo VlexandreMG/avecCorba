@@ -1,6 +1,6 @@
 # --- COMPILATEUR ET FLAGS ---
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I./lib/mysql-connector/include -I.
+CXXFLAGS = -std=c++17 -Wall -Wextra -I./lib/mysql-connector/include/jdbc -I.
 
 # --- PATHS ET LINKER MYSQL ---
 # Ajustez lib64 en lib si votre dossier s'appelle lib
