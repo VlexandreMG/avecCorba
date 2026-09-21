@@ -1,14 +1,14 @@
 # --- COMPILATEUR ET FLAGS ---
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I./lib/mysql-connector/include -I.
+CXXFLAGS = -std=c++17 -Wall -Wextra -I./lib/mysql-connector/include -I./C++
 
 # --- PATHS ET LINKER MYSQL ---
 LDFLAGS = -L./lib/mysql-connector/lib64 -lmysqlcppconn -Wl,-rpath,./lib/mysql-connector/lib64
 
 # --- FICHIERS SOURCE ET OBJET ---
-SRC = main.cpp \
-      OlonaRepository.cpp \
-      entity/Olona.cpp
+SRC = C++/Main.cpp \
+      C++/OlonaRepository.cpp \
+      C++/entity/Olona.cpp
 
 OBJ = $(SRC:.cpp=.o)
 EXEC = mon_programme
