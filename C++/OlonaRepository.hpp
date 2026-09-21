@@ -5,3 +5,11 @@
 #include <cppconn/statement.h>
 #include <cppconn/resultset.h>
 #include <cppconn/exception.h>
+
+class OlonaRepository {
+public:
+    std::string host:
+    std::string user;
+    std::string password;
+    std::string database;
+};
