@@ -14,10 +14,12 @@
 
 class OlonaRepository {
 public:
-    std::string host:
+    std::string host;
     std::string user;
     std::string password;
     std::string database;
+
+    OlonaRepository();
 
     std::string getHost(); 
     void setHost(std::string& host);
