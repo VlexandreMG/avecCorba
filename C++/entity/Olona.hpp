@@ -9,15 +9,31 @@ public:
     std::string prenom;
     std::string email; 
 
-    int getId() const; 
-    void setId(int& id) const;
+    int getId() const {
+        return id;
+    } 
+    void setId(int& id) {
+        this->id = id;
+    }
 
-    std::string getNom() const; 
-    void setNom(std::string& nom) const;
+    std::string getNom() const {
+        return nom;
+    } 
+    void setNom(std::string& nom) {
+        this->nom = nom;
+    }
 
-    std::string getPrenom() const; 
-    void setPrenom(std::string& prenom) const;
+    std::string getPrenom() const {
+        return prenom;
+    } 
+    void setPrenom(std::string& prenom) {
+        this->prenom = prenom;
+    }
 
-    std::string getEmail() const; 
-    void setEmail(std::string& email) const;
+    std::string getEmail() const {
+        return email;
+    } 
+    void setEmail(std::string& email) {
+        this->email = email;
+    }
 };

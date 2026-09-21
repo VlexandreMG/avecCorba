@@ -8,8 +8,7 @@ LDFLAGS = -L./lib/mysql-connector/lib64 -lmysqlcppconn -Wl,-rpath,./lib/mysql-co
 
 # --- FICHIERS SOURCE ET OBJET ---
 SRC = Main.cpp \
-      OlonaRepository.cpp \
-      entity/Olona.cpp
+      OlonaRepository.cpp 
 
 OBJ = $(SRC:.cpp=.o)
 EXEC = mon_programme
