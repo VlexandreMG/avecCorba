@@ -16,9 +16,24 @@ public class OlonaRepository {
         try () {
             FileReader fileReader = new FileReader(this.cheminFichier);
             BufferedReader reader = new BufferedReader(fileReader);
+
+            String line;
             // Debut de la boucle 
-            
+            while ((line = reader.readLine()) != null) {
             // À chaque ligne , transforme en un objet et le met dans la liste 
+                if (!line.trim().isEmpty()) {
+                    String[] champs =  line.split(this.separateur);
+
+                    int id = Integer.parseInt(champs[0]);
+                    String nom = champs[1];
+                    String prenom = champs[2];
+                    String email = champs[3];
+
+                    Olona man = new Olona();
+                }
+
+            }
+
 
             // Fin de la boucle 
         } catch (IOException e) {
