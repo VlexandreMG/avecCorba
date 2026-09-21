@@ -29,7 +29,7 @@ public class OlonaRepository {
         this.separateur = separateur;
     }
 
-    List<Olona> readThem() {
+    public List<Olona> readThem() {
         List<Olona> listOlona = new ArrayList<>();
 
         // Fonction pour lire le fichier 
