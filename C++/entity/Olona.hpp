@@ -1,21 +1,23 @@
 #pragma once 
 
+#include <string>
+
 class Olona {
 public:
     int id;
-    String nom;
-    String prenom;
-    String email; 
+    std::string nom;
+    std::string prenom;
+    std::string email; 
 
-    std::int getId(); 
-    void setId(std::int& id);
+    int getId() const; 
+    void setId(int& id) const;
 
-    std::string getNom(); 
-    void setNom(std::string& nom);
+    std::string getNom() const; 
+    void setNom(std::string& nom) const;
 
-    std::string getPrenom(); 
-    void setPrenom(std::string& prenom);
+    std::string getPrenom() const; 
+    void setPrenom(std::string& prenom) const;
 
-    std::string getEmail(); 
-    void setEmail(std::string& email);
+    std::string getEmail() const; 
+    void setEmail(std::string& email) const;
 };
