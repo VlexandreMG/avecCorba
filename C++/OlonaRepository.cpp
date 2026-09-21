@@ -19,3 +19,7 @@ void OlonaRepository::setPassword(const std::string& p) { password = p; }
 
 std::string OlonaRepository::getDatabase() const { return database; }
 void OlonaRepository::setDatabase(const std::string& db) { database = db; }
+
+std::vector<Olona> OlonaRepository::readThem() {
+
+}
