@@ -10,6 +10,25 @@ public class OlonaRepository {
     String cheminFichier;
     String separateur;
 
+    public OlonaRepository() {};
+
+    public String getCheminFichier() {
+        return cheminFichier;
+    }
+
+    public void setCheminFichier(String cheminFichier) {
+        this.cheminFichier = cheminFichier;
+    }
+
+    // SÉPARATEUR
+    public String getSeparateur() {
+        return separateur;
+    }
+
+    public void setSeparateur(String separateur) {
+        this.separateur = separateur;
+    }
+
     List<Olona> readThem() {
         List<Olona> listOlona = new ArrayList<>();
 
