@@ -5,5 +5,5 @@ public:
     int id;
     String nom;
     String prenom;
-    String email 
+    String email; 
 };
