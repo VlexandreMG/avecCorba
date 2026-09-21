@@ -1,10 +1,16 @@
 #pragma once 
 
+#include <vector>
+#include <string>
+#include <memory>
+
 #include <mysql_driver.h>
 #include <mysql_connection.h>
 #include <cppconn/statement.h>
 #include <cppconn/resultset.h>
 #include <cppconn/exception.h>
+
+#include "entity/Olona.hpp"
 
 class OlonaRepository {
 public:
