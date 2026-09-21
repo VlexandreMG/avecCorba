@@ -6,7 +6,7 @@ public class Olona {
     String prenom;
     String email;
 
-    public Olona(); 
+    public Olona() {}; 
 
     public int getId() {
         return id;

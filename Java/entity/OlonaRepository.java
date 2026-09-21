@@ -1,5 +1,6 @@
 package entity;
-import java.util.Array;
+
+import java.util.List;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,8 +14,7 @@ public class OlonaRepository {
         List<Olona> listOlona = new ArrayList<>();
 
         // Fonction pour lire le fichier 
-        try () {
-            FileReader fileReader = new FileReader(this.cheminFichier);
+        try (FileReader fileReader = new FileReader(this.cheminFichier);) {
             BufferedReader reader = new BufferedReader(fileReader);
 
             String line;
@@ -30,16 +30,22 @@ public class OlonaRepository {
                     String email = champs[3];
 
                     Olona man = new Olona();
+                    man.setId(id);
+                    man.setNom(nom);
+                    man.setPrenom(prenom);
+                    man.setEmail(email);
+
+            // Ajout dans la liste 
+            listOlona.add(man);
                 }
 
-            }
-
-
             // Fin de la boucle 
+            }
         } catch (IOException e) {
-
+            // Liberer de la mémoire 
+            e.printStackTrace();
         }
 
-        // Liberer de la mémoire 
+        return listOlona;
     }
 }
