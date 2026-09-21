@@ -21,17 +21,17 @@ public:
 
     OlonaRepository();
 
-    std::string getHost(); 
-    void setHost(std::string& host);
+    std::string getHost() const; 
+    void setHost(const std::string& host);
 
-    std::string getUser(); 
-    void setUser(std::string& user);
+    std::string getUser() const; 
+    void setUser(const std::string& user);
 
-    std::string getPassword(); 
-    void setPassword(std::string& password);
+    std::string getPassword() const; 
+    void setPassword(const std::string& password);
 
-    std::string getDatabase(); 
-    void setDatabase(std::string& database);
+    std::string getDatabase() const; 
+    void setDatabase(const std::string& database);
 
     std::vector<Olona> readThem();
 };
