@@ -1,6 +1,6 @@
 #include <iostream>
 #include <omniORB4/CORBA.h>
-#include <naming/Naming.hh>
+#include <omniORB4/Naming.hh>
 #include "BanqueServiceImpl.hh"
 
 int main(int argc , char**argv) {
@@ -35,10 +35,10 @@ int main(int argc , char**argv) {
         std::cout << "==================================================" << std::endl;
 
     // Bloquer sur orb->run()
-        orb->run()
+        orb->run();
     }
     catch (CORBA::Exception& ex) {
         std::cerr << "Erreur CORBA C++ : " << ex._name() << std::endl;
     }
     return 0;
-}
+};

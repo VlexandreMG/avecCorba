@@ -49,6 +49,6 @@ $(EXEC): $(CORBA_GEN_SRC) $(OBJ)
 
 # Nettoyage
 clean:
-	rm -f $(OBJ) $(EXEC) BanqueSK.cc Banque.hh
+	rm -f $(OBJ) $(EXEC) banqueSK.cc banque.hh
 
 .PHONY: all cleancd 
