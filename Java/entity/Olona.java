@@ -1,12 +1,10 @@
 package entity;
 
-public class Olona {
+public class Compte {
     int id;
     String nom;
-    String prenom;
-    String email;
 
-    public Olona() {}; 
+    public Compte() {}; 
 
     public int getId() {
         return id;
@@ -23,23 +21,5 @@ public class Olona {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    // PRENOM
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    // EMAIL
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
