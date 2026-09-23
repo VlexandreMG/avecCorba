@@ -1,30 +1,54 @@
-# --- COMPILATEUR ET FLAGS ---
+# --- COMPILATEUR ET COMPILATEUR IDL ---
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I./lib/mysql-connector/include/jdbc -I.
+IDL = omniidl
 
-# --- PATHS ET LINKER MYSQL ---
-# Ajustez lib64 en lib si votre dossier s'appelle lib
-LDFLAGS = -L./lib/mysql-connector/lib64 -lmysqlcppconn -Wl,-rpath,./lib/mysql-connector/lib64
+# --- FLAGS D'INCLUSION & OPTION DE COMPILATION ---
+# On inclut omniORB, MySQL Connector et le dossier courant
+CXXFLAGS = -std=c++17 -Wall -Wextra \
+           -I. \
+           -I./lib/mysql-connector/include/jdbc \
+           -D__x86__ -D__linux__ -D__OSVERSION__=2
 
-# --- FICHIERS SOURCE ET OBJET ---
-SRC = Main.cpp \
-      OlonaRepository.cpp 
+# --- PATHS ET EDITION DE LIENS (LDFLAGS) ---
+# Ajout des bibliothèques omniORB4 et omniDynamic4
+LDFLAGS = -L./lib/mysql-connector/lib64 -lmysqlcppconn \
+          -lomniORB4 -lomniDynamic4 -lomnithread \
+          -Wl,-rpath,./lib/mysql-connector/lib64
 
-OBJ = $(SRC:.cpp=.o)
-EXEC = mon_programme
+# --- FICHIERS IDL & SOURCES GÉNÉRÉS ---
+IDL_SRC = banque.idl
+# omniidl va générer BanqueSK.cc et Banque.hh
+CORBA_GEN_SRC = banqueSK.cc
+CORBA_GEN_OBJ = banqueSK.o
+
+# --- VOS FICHIERS SOURCE ---
+SRC = Server.cpp \
+      BanqueServiceImpl.cpp \
+      OlonaRepository.cpp
+
+OBJ = $(SRC:.cpp=.o) $(CORBA_GEN_OBJ)
+EXEC = mon_serveur_corba
 
 # --- RÈGLES DE COMPILATION ---
 all: $(EXEC)
 
-# Édition de liens
-$(EXEC): $(OBJ)
+# 1. Compilation du fichier IDL
+$(CORBA_GEN_SRC): $(IDL_SRC)
+	$(IDL) -bcxx $(IDL_SRC)
+
+# 2. Édition de liens finale
+$(EXEC): $(CORBA_GEN_SRC) $(OBJ)
 	$(CXX) $(OBJ) -o $(EXEC) $(LDFLAGS)
 
-# Règle générique de compilation des .cpp en .o
+# 3. Règle pour compiler les fichiers .cpp et .cc en .o
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean:
-	rm -f $(OBJ) $(EXEC)
+%.o: %.cc
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: all clean
+# Nettoyage
+clean:
+	rm -f $(OBJ) $(EXEC) BanqueSK.cc Banque.hh
+
+.PHONY: all cleancd 
