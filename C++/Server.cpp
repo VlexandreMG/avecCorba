@@ -21,10 +21,21 @@ int main(int argc , char**argv) {
     // Trouver le nameservice 
         CORBA::Object_var objNS = orb->resolve_initial_references("NameService");
         CosNaming::NamingContext_var nc = CosNaming::NamingContext::_narrow(objNS);
-        
+
     // Enregistrer l'objet sous "BanqueService"5
+        CosNaming::Name name;
+        name.length(1);
+        name[0].id = CORBA::string_dup("BanqueService");
+        name[0].kind = CORBA::string_dup("");
+
+        nc->rebind(name, serviceRef);
+
+        std::cout << "==================================================" << std::endl;
+        std::cout << ">>> Serveur C++ en ecoute sur le NameService ! <<<" << std::endl;
+        std::cout << "==================================================" << std::endl;
 
     // Bloquer sur orb->run()
+        orb->run()
     }
     catch () {
 
