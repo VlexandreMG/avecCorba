@@ -6,17 +6,26 @@ import BanqueModule.banqueServiceHelper;
 
 public class Main {
     public static void main(String[] args) {
-        OlonaRepository olonaR = new OlonaRepository(); 
-        olonaR.setCheminFichier("donnees.txt");
-        olonaR.setSeparateur("\\|");
+        try {
+            // 1. Initialiser l'ORB Client
+            ORB orb = ORB.init(args, null);
 
-        List<Olona> result = olonaR.readThem();
+            // 2. Obtenir le NameService
+            org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
+            NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
 
-        for (Olona o : result) {
-            System.out.println("ID :" + o.getId());
-            System.out.println("Nom:" + o.getNom());
-            System.out.println("Prenom :" + o.getPrenom());
-            System.out.println("Email :" + o.getEmail());
+            // 3. Chercher le service "BanqueService"
+            banqueService service = banqueServiceHelper.narrow(ncRef.resolve_str("BanqueService"));
+
+            System.out.println("[CLIENT JAVA] Connecté au serveur C++ !");
+
+            // 4. Appeler la fonction C++
+            boolean resultat = service.faireDepot(1, 500.0);
+            System.out.println("[CLIENT JAVA] Résultat du dépôt : " + resultat);
+
+        } catch (Exception e) {
+            System.err.println("[ERREUR CLIENT JAVA] : " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
