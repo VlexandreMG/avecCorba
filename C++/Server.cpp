@@ -17,9 +17,11 @@ int main(int argc , char**argv) {
     // Instancier le service C++ 
         BanqueServiceImpl* serviceImpl = new BanqueServiceImpl();
         BanqueModule::banqueService_var serviceRef = serviceImpl->_this();
-        
-    // Trouver le nameservice 
 
+    // Trouver le nameservice 
+        CORBA::Object_var objNS = orb->resolve_initial_references("NameService");
+        CosNaming::NamingContext_var nc = CosNaming::NamingContext::_narrow(objNS);
+        
     // Enregistrer l'objet sous "BanqueService"5
 
     // Bloquer sur orb->run()
