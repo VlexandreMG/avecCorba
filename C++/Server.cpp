@@ -15,10 +15,12 @@ int main(int argc , char**argv) {
         poa->the_POAManager()->activate();
 
     // Instancier le service C++ 
+        BanqueServiceImpl* serviceImpl = new BanqueServiceImpl();
+        BanqueModule::banqueService_var serviceRef = serviceImpl->_this();
         
     // Trouver le nameservice 
 
-    // Enregistrer l'objet sous "BanqueService"
+    // Enregistrer l'objet sous "BanqueService"5
 
     // Bloquer sur orb->run()
     }
