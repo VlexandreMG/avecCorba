@@ -51,7 +51,7 @@ public class CompteRepository {
                     man.setNom(nom);
 
             // Ajout dans la liste 
-            listCompte.add(compte);
+            listCompte.add(man);
                 }
 
             // Fin de la boucle 
