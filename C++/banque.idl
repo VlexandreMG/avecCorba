@@ -1,11 +1,13 @@
-module BanqueModule {
+module Banque {
 
-    struct CompteDTO {
+    struct Compte {
         long id;
         string nom;
+        double solde;
     };
 
     interface banqueService {
-        boolean faireDepot(in long idCompte , in double montant);
+        faireDepot(in long id , in double montant);
     };
+
 };
