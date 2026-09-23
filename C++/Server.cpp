@@ -8,12 +8,14 @@ int main(int argc , char**argv) {
 
     // Allumer l'ORB 
         CORBA::ORB_var orb = CORBA::ORB_init(argc, argv);
+
     // Activer le POA
         CORBA::Object_var objPOA = orb->resolve_initial_references("RootPOA");
         PortableServer::POA_var poa = PortableServer::POA::_narrow(objPOA);
         poa->the_POAManager()->activate();
-    // Instancier le service C++ 
 
+    // Instancier le service C++ 
+        
     // Trouver le nameservice 
 
     // Enregistrer l'objet sous "BanqueService"
