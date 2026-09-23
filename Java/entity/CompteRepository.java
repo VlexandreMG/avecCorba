@@ -6,11 +6,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class OlonaRepository {
+public class CompteRepository {
     String cheminFichier;
     String separateur;
 
-    public OlonaRepository() {};
+    public CompteRepository() {};
 
     public String getCheminFichier() {
         return cheminFichier;
@@ -29,8 +29,8 @@ public class OlonaRepository {
         this.separateur = separateur;
     }
 
-    public List<Olona> readThem() {
-        List<Olona> listOlona = new ArrayList<>();
+    public List<Compte> readThem() {
+        List<Compte> listCompte = new ArrayList<>();
 
         // Fonction pour lire le fichier 
         try (FileReader fileReader = new FileReader(this.cheminFichier);) {
@@ -45,17 +45,13 @@ public class OlonaRepository {
 
                     int id = Integer.parseInt(champs[0]);
                     String nom = champs[1];
-                    String prenom = champs[2];
-                    String email = champs[3];
 
-                    Olona man = new Olona();
+                    Compte man = new Compte();
                     man.setId(id);
                     man.setNom(nom);
-                    man.setPrenom(prenom);
-                    man.setEmail(email);
 
             // Ajout dans la liste 
-            listOlona.add(man);
+            listCompte.add(compte);
                 }
 
             // Fin de la boucle 
@@ -65,7 +61,7 @@ public class OlonaRepository {
             e.printStackTrace();
         }
 
-        return listOlona;
+        return listCompte;
     }
 
     
