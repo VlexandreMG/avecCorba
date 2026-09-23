@@ -37,7 +37,8 @@ int main(int argc , char**argv) {
     // Bloquer sur orb->run()
         orb->run()
     }
-    catch () {
-
+    catch (CORBA::Exception& ex) {
+        std::cerr << "Erreur CORBA C++ : " << ex._name() << std::endl;
     }
+    return 0;
 }
