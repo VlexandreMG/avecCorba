@@ -1,5 +1,6 @@
 #include "OlonaRepository.hpp"
 #include <iostream>
+#include <cppconn/prepared_statement.h>
 
 OlonaRepository::OlonaRepository()
     : host("tcp://127.0.0.1:3306"),
@@ -56,4 +57,33 @@ std::vector<Olona> OlonaRepository::readThem() {
     }
 
     return listOlona;
+}
+
+bool OlonaRepository::update(long id , double montant) {
+    try {
+        // Activation du driver 
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
+
+        // Connexion à la base de données 
+        std::unique_ptr<sql::Connection> con(driver->connect(host, user, password));
+
+        // Selectionner la base de données 
+        con->setSchema(database);
+
+        // Création du Preparedstatement 
+        std::unique_ptr<sql::PreparedStatement> pstmt(con->prepareStatement("UPDATE compte SET solde = + ? WHERE id = ?"));
+
+        // On rempli avec 
+        pstmt->setDouble(1,montant);
+        pstmt->setInt(2,id);
+
+        // Execution de l'update 
+        int rowUpdated = pstmt->executeUpdate();
+
+        // Verif 
+        return (rowUpdated > 0);
+    } catch (sql::SQLException& e) {
+        std::cerr << "Erreur SQL dans update : " << e.what() << std::endl;
+        return false;
+    }
 }
