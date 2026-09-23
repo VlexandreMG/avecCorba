@@ -27,7 +27,7 @@ SRC = Server.cpp \
       OlonaRepository.cpp
 
 OBJ = $(SRC:.cpp=.o) $(CORBA_GEN_OBJ)
-EXEC = mon_serveur_corba
+EXEC = monServeurCorba
 
 # --- RÈGLES DE COMPILATION ---
 all: $(EXEC)
