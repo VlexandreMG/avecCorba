@@ -15,55 +15,57 @@ OMNI_MAYBE_UNUSED static const char* _0RL_library_version = omniORB_4_3;
 
 
 void
-BanqueModule::CompteDTO::operator>>= (cdrStream &_n) const
+Banque::Compte::operator>>= (cdrStream &_n) const
 {
   id >>= _n;
   _n.marshalString(nom,0);
+  solde >>= _n;
 
 }
 
 void
-BanqueModule::CompteDTO::operator<<= (cdrStream &_n)
+Banque::Compte::operator<<= (cdrStream &_n)
 {
   (::CORBA::Long&)id <<= _n;
   nom = _n.unmarshalString(0);
+  (::CORBA::Double&)solde <<= _n;
 
 }
 
-BanqueModule::banqueService_ptr BanqueModule::banqueService_Helper::_nil() {
-  return ::BanqueModule::banqueService::_nil();
+Banque::banqueService_ptr Banque::banqueService_Helper::_nil() {
+  return ::Banque::banqueService::_nil();
 }
 
-::CORBA::Boolean BanqueModule::banqueService_Helper::is_nil(::BanqueModule::banqueService_ptr p) {
+::CORBA::Boolean Banque::banqueService_Helper::is_nil(::Banque::banqueService_ptr p) {
   return ::CORBA::is_nil(p);
 
 }
 
-void BanqueModule::banqueService_Helper::release(::BanqueModule::banqueService_ptr p) {
+void Banque::banqueService_Helper::release(::Banque::banqueService_ptr p) {
   ::CORBA::release(p);
 }
 
-void BanqueModule::banqueService_Helper::marshalObjRef(::BanqueModule::banqueService_ptr obj, cdrStream& s) {
-  ::BanqueModule::banqueService::_marshalObjRef(obj, s);
+void Banque::banqueService_Helper::marshalObjRef(::Banque::banqueService_ptr obj, cdrStream& s) {
+  ::Banque::banqueService::_marshalObjRef(obj, s);
 }
 
-BanqueModule::banqueService_ptr BanqueModule::banqueService_Helper::unmarshalObjRef(cdrStream& s) {
-  return ::BanqueModule::banqueService::_unmarshalObjRef(s);
+Banque::banqueService_ptr Banque::banqueService_Helper::unmarshalObjRef(cdrStream& s) {
+  return ::Banque::banqueService::_unmarshalObjRef(s);
 }
 
-void BanqueModule::banqueService_Helper::duplicate(::BanqueModule::banqueService_ptr obj) {
+void Banque::banqueService_Helper::duplicate(::Banque::banqueService_ptr obj) {
   if (obj && !obj->_NP_is_nil())  omni::duplicateObjRef(obj);
 }
 
-BanqueModule::banqueService_ptr
-BanqueModule::banqueService::_duplicate(::BanqueModule::banqueService_ptr obj)
+Banque::banqueService_ptr
+Banque::banqueService::_duplicate(::Banque::banqueService_ptr obj)
 {
   if (obj && !obj->_NP_is_nil())  omni::duplicateObjRef(obj);
   return obj;
 }
 
-BanqueModule::banqueService_ptr
-BanqueModule::banqueService::_narrow(::CORBA::Object_ptr obj)
+Banque::banqueService_ptr
+Banque::banqueService::_narrow(::CORBA::Object_ptr obj)
 {
   if (!obj || obj->_NP_is_nil() || obj->_NP_is_pseudo()) return _nil();
   _ptr_type e = (_ptr_type) obj->_PR_getobj()->_realNarrow(_PD_repoId);
@@ -71,16 +73,16 @@ BanqueModule::banqueService::_narrow(::CORBA::Object_ptr obj)
 }
 
 
-BanqueModule::banqueService_ptr
-BanqueModule::banqueService::_unchecked_narrow(::CORBA::Object_ptr obj)
+Banque::banqueService_ptr
+Banque::banqueService::_unchecked_narrow(::CORBA::Object_ptr obj)
 {
   if (!obj || obj->_NP_is_nil() || obj->_NP_is_pseudo()) return _nil();
   _ptr_type e = (_ptr_type) obj->_PR_getobj()->_uncheckedNarrow(_PD_repoId);
   return e ? e : _nil();
 }
 
-BanqueModule::banqueService_ptr
-BanqueModule::banqueService::_nil()
+Banque::banqueService_ptr
+Banque::banqueService::_nil()
 {
 #ifdef OMNI_UNLOADABLE_STUBS
   static _objref_banqueService _the_nil_obj;
@@ -99,16 +101,16 @@ BanqueModule::banqueService::_nil()
 #endif
 }
 
-const char* BanqueModule::banqueService::_PD_repoId = "IDL:BanqueModule/banqueService:1.0";
+const char* Banque::banqueService::_PD_repoId = "IDL:Banque/banqueService:1.0";
 
 
-BanqueModule::_objref_banqueService::~_objref_banqueService() {
+Banque::_objref_banqueService::~_objref_banqueService() {
   
 }
 
 
-BanqueModule::_objref_banqueService::_objref_banqueService(omniIOR* ior, omniIdentity* id) :
-   omniObjRef(::BanqueModule::banqueService::_PD_repoId, ior, id, 1)
+Banque::_objref_banqueService::_objref_banqueService(omniIOR* ior, omniIdentity* id) :
+   omniObjRef(::Banque::banqueService::_PD_repoId, ior, id, 1)
    
    
 {
@@ -116,16 +118,16 @@ BanqueModule::_objref_banqueService::_objref_banqueService(omniIOR* ior, omniIde
 }
 
 void*
-BanqueModule::_objref_banqueService::_ptrToObjRef(const char* id)
+Banque::_objref_banqueService::_ptrToObjRef(const char* id)
 {
-  if (id == ::BanqueModule::banqueService::_PD_repoId)
-    return (::BanqueModule::banqueService_ptr) this;
+  if (id == ::Banque::banqueService::_PD_repoId)
+    return (::Banque::banqueService_ptr) this;
   
   if (id == ::CORBA::Object::_PD_repoId)
     return (::CORBA::Object_ptr) this;
 
-  if (omni::strMatch(id, ::BanqueModule::banqueService::_PD_repoId))
-    return (::BanqueModule::banqueService_ptr) this;
+  if (omni::strMatch(id, ::Banque::banqueService::_PD_repoId))
+    return (::Banque::banqueService_ptr) this;
   
   if (omni::strMatch(id, ::CORBA::Object::_PD_repoId))
     return (::CORBA::Object_ptr) this;
@@ -135,15 +137,15 @@ BanqueModule::_objref_banqueService::_ptrToObjRef(const char* id)
 
 
 //
-// Code for BanqueModule::banqueService::faireDepot
+// Code for Banque::banqueService::faireDepot
 
 // Proxy call descriptor class. Mangled signature:
-//  _cboolean_i_clong_i_cdouble
-class _0RL_cd_586baeac1f53af63_00000000
+//  _cBanque_mCompte_i_clong_i_cdouble
+class _0RL_cd_a04c7d42f6f13da2_00000000
   : public omniCallDescriptor
 {
 public:
-  inline _0RL_cd_586baeac1f53af63_00000000(LocalCallFn lcfn, const char* op_, size_t oplen, _CORBA_Boolean upcall=0)
+  inline _0RL_cd_a04c7d42f6f13da2_00000000(LocalCallFn lcfn, const char* op_, size_t oplen, _CORBA_Boolean upcall=0)
     : omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
   {
     
@@ -160,94 +162,95 @@ public:
 
   ::CORBA::Long arg_0;
   ::CORBA::Double arg_1;
-  ::CORBA::Boolean result;
+  Banque::Compte_var result;
 };
 
-void _0RL_cd_586baeac1f53af63_00000000::marshalArguments(cdrStream& _n)
+void _0RL_cd_a04c7d42f6f13da2_00000000::marshalArguments(cdrStream& _n)
 {
   arg_0 >>= _n;
   arg_1 >>= _n;
 
 }
 
-void _0RL_cd_586baeac1f53af63_00000000::unmarshalArguments(cdrStream& _n)
+void _0RL_cd_a04c7d42f6f13da2_00000000::unmarshalArguments(cdrStream& _n)
 {
   (::CORBA::Long&)arg_0 <<= _n;
   (::CORBA::Double&)arg_1 <<= _n;
 
 }
 
-void _0RL_cd_586baeac1f53af63_00000000::marshalReturnedValues(cdrStream& _n)
+void _0RL_cd_a04c7d42f6f13da2_00000000::marshalReturnedValues(cdrStream& _n)
 {
-  _n.marshalBoolean(result);
+  (const Banque::Compte&) result >>= _n;
 
 }
 
-void _0RL_cd_586baeac1f53af63_00000000::unmarshalReturnedValues(cdrStream& _n)
+void _0RL_cd_a04c7d42f6f13da2_00000000::unmarshalReturnedValues(cdrStream& _n)
 {
-  result = _n.unmarshalBoolean();
+  result = new Banque::Compte;
+  (Banque::Compte&)result <<= _n;
 
 }
 
-const char* const _0RL_cd_586baeac1f53af63_00000000::_user_exns[] = {
+const char* const _0RL_cd_a04c7d42f6f13da2_00000000::_user_exns[] = {
   0
 };
 
 // Local call call-back function.
 static void
-_0RL_lcfn_586baeac1f53af63_10000000(omniCallDescriptor* cd, omniServant* svnt)
+_0RL_lcfn_a04c7d42f6f13da2_10000000(omniCallDescriptor* cd, omniServant* svnt)
 {
-  _0RL_cd_586baeac1f53af63_00000000* tcd = (_0RL_cd_586baeac1f53af63_00000000*)cd;
-  BanqueModule::_impl_banqueService* impl = (BanqueModule::_impl_banqueService*) svnt->_ptrToInterface(BanqueModule::banqueService::_PD_repoId);
+  _0RL_cd_a04c7d42f6f13da2_00000000* tcd = (_0RL_cd_a04c7d42f6f13da2_00000000*)cd;
+  Banque::_impl_banqueService* impl = (Banque::_impl_banqueService*) svnt->_ptrToInterface(Banque::banqueService::_PD_repoId);
   tcd->result = impl->faireDepot(tcd->arg_0, tcd->arg_1);
 
 
 }
 
-::CORBA::Boolean BanqueModule::_objref_banqueService::faireDepot(::CORBA::Long idCompte, ::CORBA::Double montant)
+Banque::Compte* Banque::_objref_banqueService::faireDepot(::CORBA::Long id, ::CORBA::Double montant)
 {
-  _0RL_cd_586baeac1f53af63_00000000 _call_desc(_0RL_lcfn_586baeac1f53af63_10000000, "faireDepot", 11);
-  _call_desc.arg_0 = idCompte;
+  _0RL_cd_a04c7d42f6f13da2_00000000 _call_desc(_0RL_lcfn_a04c7d42f6f13da2_10000000, "faireDepot", 11);
+  _call_desc.arg_0 = id;
   _call_desc.arg_1 = montant;
 
   _invoke(_call_desc);
-  return _call_desc.result;
+  return _call_desc.result._retn();
 
 
 }
 
-BanqueModule::_pof_banqueService::~_pof_banqueService() {}
+Banque::_pof_banqueService::~_pof_banqueService() {}
 
 
 omniObjRef*
-BanqueModule::_pof_banqueService::newObjRef(omniIOR* ior, omniIdentity* id)
+Banque::_pof_banqueService::newObjRef(omniIOR* ior, omniIdentity* id)
 {
-  return new ::BanqueModule::_objref_banqueService(ior, id);
+  return new ::Banque::_objref_banqueService(ior, id);
 }
 
 
 ::CORBA::Boolean
-BanqueModule::_pof_banqueService::is_a(const char* id) const
+Banque::_pof_banqueService::is_a(const char* id) const
 {
-  if (omni::ptrStrMatch(id, ::BanqueModule::banqueService::_PD_repoId))
+  if (omni::ptrStrMatch(id, ::Banque::banqueService::_PD_repoId))
     return 1;
   
   return 0;
 }
 
-const BanqueModule::_pof_banqueService _the_pof_BanqueModule_mbanqueService;
+const Banque::_pof_banqueService _the_pof_Banque_mbanqueService;
 
-BanqueModule::_impl_banqueService::~_impl_banqueService() {}
+Banque::_impl_banqueService::~_impl_banqueService() {}
 
 
 ::CORBA::Boolean
-BanqueModule::_impl_banqueService::_dispatch(omniCallHandle& _handle)
+Banque::_impl_banqueService::_dispatch(omniCallHandle& _handle)
 {
   const char* op = _handle.operation_name();
 
   if (omni::strMatch(op, "faireDepot")) {
 
-    _0RL_cd_586baeac1f53af63_00000000 _call_desc(_0RL_lcfn_586baeac1f53af63_10000000, "faireDepot", 11, 1);
+    _0RL_cd_a04c7d42f6f13da2_00000000 _call_desc(_0RL_lcfn_a04c7d42f6f13da2_10000000, "faireDepot", 11, 1);
     
     _handle.upcall(this,_call_desc);
     return 1;
@@ -258,16 +261,16 @@ BanqueModule::_impl_banqueService::_dispatch(omniCallHandle& _handle)
 }
 
 void*
-BanqueModule::_impl_banqueService::_ptrToInterface(const char* id)
+Banque::_impl_banqueService::_ptrToInterface(const char* id)
 {
-  if (id == ::BanqueModule::banqueService::_PD_repoId)
-    return (::BanqueModule::_impl_banqueService*) this;
+  if (id == ::Banque::banqueService::_PD_repoId)
+    return (::Banque::_impl_banqueService*) this;
   
   if (id == ::CORBA::Object::_PD_repoId)
     return (void*) 1;
 
-  if (omni::strMatch(id, ::BanqueModule::banqueService::_PD_repoId))
-    return (::BanqueModule::_impl_banqueService*) this;
+  if (omni::strMatch(id, ::Banque::banqueService::_PD_repoId))
+    return (::Banque::_impl_banqueService*) this;
   
   if (omni::strMatch(id, ::CORBA::Object::_PD_repoId))
     return (void*) 1;
@@ -275,10 +278,10 @@ BanqueModule::_impl_banqueService::_ptrToInterface(const char* id)
 }
 
 const char*
-BanqueModule::_impl_banqueService::_mostDerivedRepoId()
+Banque::_impl_banqueService::_mostDerivedRepoId()
 {
-  return ::BanqueModule::banqueService::_PD_repoId;
+  return ::Banque::banqueService::_PD_repoId;
 }
 
-POA_BanqueModule::banqueService::~banqueService() {}
+POA_Banque::banqueService::~banqueService() {}
 

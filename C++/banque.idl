@@ -7,7 +7,7 @@ module Banque {
     };
 
     interface banqueService {
-        faireDepot(in long id , in double montant);
+        Compte faireDepot(in long id , in double montant);
     };
 
 };

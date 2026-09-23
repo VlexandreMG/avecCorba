@@ -52,17 +52,19 @@
 
 
 
-_CORBA_MODULE BanqueModule
+_CORBA_MODULE Banque
 
 _CORBA_MODULE_BEG
 
-  struct CompteDTO {
-    typedef _CORBA_ConstrType_Variable_Var<CompteDTO> _var_type;
+  struct Compte {
+    typedef _CORBA_ConstrType_Variable_Var<Compte> _var_type;
 
     
     ::CORBA::Long id;
 
     ::CORBA::String_member nom;
+
+    ::CORBA::Double solde;
 
   
 
@@ -70,12 +72,12 @@ _CORBA_MODULE_BEG
     void operator<<= (cdrStream &);
   };
 
-  typedef CompteDTO::_var_type CompteDTO_var;
+  typedef Compte::_var_type Compte_var;
 
-  typedef _CORBA_ConstrType_Variable_OUT_arg< CompteDTO,CompteDTO_var > CompteDTO_out;
+  typedef _CORBA_ConstrType_Variable_OUT_arg< Compte,Compte_var > Compte_out;
 
-#ifndef __BanqueModule_mbanqueService__
-#define __BanqueModule_mbanqueService__
+#ifndef __Banque_mbanqueService__
+#define __Banque_mbanqueService__
   class banqueService;
   class _objref_banqueService;
   class _impl_banqueService;
@@ -142,7 +144,7 @@ _CORBA_MODULE_BEG
   {
   public:
     // IDL operations
-    ::CORBA::Boolean faireDepot(::CORBA::Long idCompte, ::CORBA::Double montant);
+    Compte* faireDepot(::CORBA::Long id, ::CORBA::Double montant);
 
     // Constructors
     inline _objref_banqueService()  { _PR_setobj(0); }  // nil
@@ -177,7 +179,7 @@ _CORBA_MODULE_BEG
   public:
     virtual ~_impl_banqueService();
 
-    virtual ::CORBA::Boolean faireDepot(::CORBA::Long idCompte, ::CORBA::Double montant) = 0;
+    virtual Compte* faireDepot(::CORBA::Long id, ::CORBA::Double montant) = 0;
     
   public:  // Really protected, workaround for xlC
     virtual _CORBA_Boolean _dispatch(omniCallHandle&);
@@ -193,18 +195,18 @@ _CORBA_MODULE_END
 
 
 
-_CORBA_MODULE POA_BanqueModule
+_CORBA_MODULE POA_Banque
 _CORBA_MODULE_BEG
 
   class banqueService :
-    public virtual BanqueModule::_impl_banqueService,
+    public virtual Banque::_impl_banqueService,
     public virtual ::PortableServer::ServantBase
   {
   public:
     virtual ~banqueService();
 
-    inline ::BanqueModule::banqueService_ptr _this() {
-      return (::BanqueModule::banqueService_ptr) _do_this(::BanqueModule::banqueService::_PD_repoId);
+    inline ::Banque::banqueService_ptr _this() {
+      return (::Banque::banqueService_ptr) _do_this(::Banque::banqueService::_PD_repoId);
     }
   };
 
@@ -212,7 +214,7 @@ _CORBA_MODULE_END
 
 
 
-_CORBA_MODULE OBV_BanqueModule
+_CORBA_MODULE OBV_Banque
 _CORBA_MODULE_BEG
 
 _CORBA_MODULE_END
@@ -227,7 +229,7 @@ _CORBA_MODULE_END
 
 
 inline void
-BanqueModule::banqueService::_marshalObjRef(::BanqueModule::banqueService_ptr obj, cdrStream& s) {
+Banque::banqueService::_marshalObjRef(::Banque::banqueService_ptr obj, cdrStream& s) {
   omniObjRef::_marshal(obj->_PR_getobj(),s);
 }
 
