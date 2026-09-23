@@ -3,7 +3,7 @@
 BanqueServiceImpl::BanqueServiceImpl() {}
 BanqueServiceImpl::~BanqueServiceImpl() {}
 
-::CORBA::Boolean faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) {
+::CORBA::Boolean BanqueServiceImpl::faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) {
     std::cout << "[SERVEUR C++] Id Compte : "<< idCompte << std::endl;
     std::cout << "[SERVEUR C++] Montant : "<< montant << std::endl;
     
