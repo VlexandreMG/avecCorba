@@ -1,3 +1,4 @@
+-- Active: 1789993741976@@127.0.0.1@3306@test_db
 -- 1. Création de la base de données si elle n'existe pas
 CREATE DATABASE IF NOT EXISTS `test_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -20,3 +21,13 @@ INSERT INTO `olona` (`nom`, `prenom`, `email`) VALUES
 ('Ranaivo', 'Aina', 'aina.ranaivo@email.com'),
 ('Rakoto', 'Koto', 'koto.rakoto@email.com'),
 ('Andria', 'Soa', 'soa.andria@email.com');
+
+CREATE TABLE compte (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL,
+    solde DOUBLE(10,6) NOT NULL
+)
+
+INSERT INTO compte (nom , solde) VALUES 
+('Balou', 200.00),
+('Louba', 400.00)
