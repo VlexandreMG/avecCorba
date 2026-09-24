@@ -20,5 +20,5 @@ public:
 
     // Pourquoi il y a tous ces CORBA 
     // Pour éviter les conflits avec les noms 
-    Banque::Compte faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) override;
+    Banque::Compte* faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) override;
 };
