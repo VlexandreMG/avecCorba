@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 import Banque.Compte;
 import Banque.banqueService;
@@ -86,4 +88,30 @@ public class CompteRepository {
 
         return compteMisAJour;
     }   
+
+    public boolean enregistrerDepot(Compte compte, double montantDepose) {
+        if (compte == null) {
+            System.err.println("[Java Log] Impossible d'écrire : le compte est nul.");
+            return false;
+        }
+
+        // On ouvre le fichier en mode "append" (deuxième paramètre = true)
+        try (FileWriter fw = new FileWriter(this.cheminFichier, true);
+             BufferedWriter writer = new BufferedWriter(fw)) {
+
+            // Construction de la ligne avec le séparateur (ex: ";")
+            String logLine = compte.id + this.separateur + compte.nom + this.separateur + compte.solde + this.separateur + montantDepose;
+
+            writer.write(logLine);
+            writer.newLine(); // Passage à la ligne suivante
+
+            System.out.println("[Java Log] Opération enregistrée dans " + this.cheminFichier + " : " + logLine);
+            return true;
+
+        } catch (IOException e) {
+            System.err.println("[Java Log] Erreur lors de l'écriture dans le fichier log : " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
