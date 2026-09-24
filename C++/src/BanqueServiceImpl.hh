@@ -8,9 +8,10 @@
 // quel ORB , cet héritage transforme la classe BanqueServiceImpl en skeleton
 // pour qu'il puisse intéragir en réseau. 
 
-class BanqueServiceImpl : public POA_BanqueModule::banqueService {
+class BanqueServiceImpl : public POA_Banque::banqueService {
 public:
     BanqueServiceImpl();
+    OlonaRepository olonaRepo;
 
     // Pourquoi il y a un constructeur en virtual 
     // ~ signifie que c'est un destructeur , et le virtual ,
