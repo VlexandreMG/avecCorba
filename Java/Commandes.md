@@ -9,3 +9,6 @@
 
 # Compilation rehefa mitest 
 - javac -d bin -sourcepath src src/entity/CompteRepository.java 
+
+# Compilation izy rehetra 
+- javac -d bin -sourcepath src $(find src -name "*.java")

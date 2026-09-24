@@ -33,7 +33,7 @@ public class Main {
             // 4. Appeler la fonction C++
             Compte compteMaj = cp.getCompteFromCpp(service,idCompte,montant);
 
-            if (compteMaj != NULL) {
+            if (compteMaj != null) {
                 cp.enregistrerDepot(compteMaj,montant);
                 System.out.println("[Java Client] Traitement terminé avec succès.");
             } else {
