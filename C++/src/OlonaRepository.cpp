@@ -58,31 +58,32 @@ std::vector<Olona> OlonaRepository::readThem() {
     return listOlona;
 }
 
-bool OlonaRepository::update(long id , double montant) {
+bool OlonaRepository::update(long id, double montant) {
     try {
-        // Activation du driver 
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
-
-        // Connexion à la base de données 
         std::unique_ptr<sql::Connection> con(driver->connect(host, user, password));
-
-        // Selectionner la base de données 
         con->setSchema(database);
 
-        // Création du Preparedstatement 
-        std::unique_ptr<sql::PreparedStatement> pstmt(con->prepareStatement("UPDATE compte SET solde = ? WHERE id = ?"));
+        std::cout << "[C++ Repo] Connexion BDD réussie (" << database << ")" << std::endl;
 
-        // On rempli avec 
-        pstmt->setDouble(1,montant);
-        pstmt->setInt(2,id);
+        std::unique_ptr<sql::PreparedStatement> pstmt(
+            con->prepareStatement("UPDATE compte SET solde = solde + ? WHERE id = ?")
+        );
 
-        // Execution de l'update 
+        pstmt->setDouble(1, montant);
+        pstmt->setInt64(2, static_cast<int64_t>(id));
+
         int rowUpdated = pstmt->executeUpdate();
+        std::cout << "[C++ Repo] Lignes affectées par l'UPDATE : " << rowUpdated << std::endl;
 
-        // Verif 
         return (rowUpdated > 0);
+
     } catch (sql::SQLException& e) {
-        std::cerr << "Erreur SQL dans update : " << e.what() << std::endl;
+        std::cerr << "[C++ Repo Error] SQL Exception: " << e.what() 
+                  << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+        return false;
+    } catch (const std::exception& e) {
+        std::cerr << "[C++ Repo Error] Standard Exception: " << e.what() << std::endl;
         return false;
     }
 }
