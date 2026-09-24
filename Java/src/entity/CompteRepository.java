@@ -114,4 +114,33 @@ public class CompteRepository {
             return false;
         }
     }
+
+    public boolean updateCompte(int id, double montant) {
+        try (BufferedReader br = new BufferedReader(new FileReader(this.cheminFichier))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    String[] champs = line.split(this.separateur);
+                    int idLine = Integer.parseInt(champs[0]);     
+
+                    if (idLine == id) {
+                        // 1. Transformer la 3ème colonne (index 2) en double 
+                    double soldeActuel = Double.parseDouble(champs[2].trim());
+
+                    // 2. Sommer avec le montant du dépôt
+                    double nouveauSolde = soldeActuel + montant;
+
+                    // 3. Remettre sur champs[2] en le transformant en String 
+                    champs[2] = String.valueOf(nouveauSolde);
+                    }
+                }       
+            }
+
+            return true 
+        } catch (IOException e) {
+            System.err.println("Il y a une erreur dans le update : " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }     
+    }
 }
