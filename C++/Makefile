@@ -24,38 +24,46 @@ IDL_SRC = banque.idl
 CORBA_GEN_SRC = $(GEN_DIR)/banqueSK.cc
 CORBA_GEN_OBJ = $(GEN_DIR)/banqueSK.o
 
-# --- FICHIERS SOURCE (dans src/) ---
-SRC = $(SRC_DIR)/Server.cpp \
-      $(SRC_DIR)/BanqueServiceImpl.cpp \
-      $(SRC_DIR)/OlonaRepository.cpp \
-      $(SRC_DIR)/ClientMain.cpp
+# --- FICHIERS SOURCE SERVEUR ---
+SERVER_SRC = $(SRC_DIR)/Server.cpp \
+             $(SRC_DIR)/BanqueServiceImpl.cpp \
+             $(SRC_DIR)/OlonaRepository.cpp
+SERVER_OBJ = $(SERVER_SRC:.cpp=.o) $(CORBA_GEN_OBJ)
 
-# Transformation des .cpp et .cc en .o
-OBJ = $(SRC:.cpp=.o) $(CORBA_GEN_OBJ)
-EXEC = monServeurCorba
+# --- FICHIERS SOURCE CLIENT ---
+CLIENT_SRC = $(SRC_DIR)/ClientMain.cpp
+CLIENT_OBJ = $(CLIENT_SRC:.cpp=.o) $(CORBA_GEN_OBJ)
+
+# --- EXÉCUTABLES ---
+SERVER_EXEC = monServeurCorba
+CLIENT_EXEC = client_cpp
 
 # --- RÈGLES DE COMPILATION ---
-all: $(EXEC)
+all: $(CORBA_GEN_SRC) $(SERVER_EXEC) $(CLIENT_EXEC)
 
-# 1. Compilation du fichier IDL dans le dossier generated/
+# 1. Compilation du fichier IDL
 $(CORBA_GEN_SRC): $(IDL_SRC)
 	@mkdir -p $(GEN_DIR)
 	$(IDL) -bcxx -C$(GEN_DIR) $(IDL_SRC)
 
-# 2. Édition de liens finale
-$(EXEC): $(CORBA_GEN_SRC) $(OBJ)
-	$(CXX) $(OBJ) -o $(EXEC) $(LDFLAGS)
+# 2. Édition de liens du SERVEUR
+$(SERVER_EXEC): $(SERVER_OBJ)
+	$(CXX) $(SERVER_OBJ) -o $(SERVER_EXEC) $(LDFLAGS)
 
-# 3. Règle pour compiler les fichiers .cpp de src/
+# 3. Édition de liens du CLIENT
+$(CLIENT_EXEC): $(CLIENT_OBJ)
+	$(CXX) $(CLIENT_OBJ) -o $(CLIENT_EXEC) $(LDFLAGS)
+
+# 4. Compilation des fichiers .cpp de src/
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# 4. Règle pour compiler le code CORBA généré dans generated/
+# 5. Compilation du code CORBA généré dans generated/
 $(GEN_DIR)/%.o: $(GEN_DIR)/%.cc
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Nettoyage
 clean:
-	rm -rf $(OBJ) $(EXEC) $(GEN_DIR)
+	rm -rf $(SRC_DIR)/*.o $(SERVER_EXEC) $(CLIENT_EXEC) $(GEN_DIR)
 
 .PHONY: all clean
