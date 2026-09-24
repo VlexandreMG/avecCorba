@@ -27,7 +27,8 @@ CORBA_GEN_OBJ = $(GEN_DIR)/banqueSK.o
 # --- FICHIERS SOURCE (dans src/) ---
 SRC = $(SRC_DIR)/Server.cpp \
       $(SRC_DIR)/BanqueServiceImpl.cpp \
-      $(SRC_DIR)/OlonaRepository.cpp
+      $(SRC_DIR)/OlonaRepository.cpp \
+      $(SRC_DIR)/ClientMain.cpp
 
 # Transformation des .cpp et .cc en .o
 OBJ = $(SRC:.cpp=.o) $(CORBA_GEN_OBJ)
