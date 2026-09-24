@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "banque.hh"
+#include "OlonaRepository.hpp"
 
 // C'est quoi le POA : Le portable indique la portabilité sur n'importe 
 // quel ORB , cet héritage transforme la classe BanqueServiceImpl en skeleton
