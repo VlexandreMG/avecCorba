@@ -1,6 +1,5 @@
 #include "OlonaRepository.hpp"
 #include <iostream>
-#include <cppconn/prepared_statement.h>
 
 OlonaRepository::OlonaRepository()
     : host("tcp://127.0.0.1:3306"),
@@ -86,4 +85,43 @@ bool OlonaRepository::update(long id , double montant) {
         std::cerr << "Erreur SQL dans update : " << e.what() << std::endl;
         return false;
     }
+}
+
+BanqueModule::Compte OlonaRepository::readById(long id) {
+    // Initialisation d'une structure Compte par défaut
+    BanqueModule::Compte compte;
+    compte.id = 0;
+    compte.nom = CORBA::string_dup("");
+    compte.solde = 0.0;
+
+    try {
+        // 1. Activation du driver & Connexion
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
+        std::unique_ptr<sql::Connection> con(driver->connect(host, user, password));
+        con->setSchema(database);
+
+        // 2. Préparation de la requête SELECT
+        std::unique_ptr<sql::PreparedStatement> pstmt(
+            con->prepareStatement("SELECT id, nom, solde FROM compte WHERE id = ?")
+        );
+        pstmt->setInt(1, id); // Remplacement du premier '?' par l'ID
+
+        // 3. Exécution de la requête (executeQuery pour un SELECT)
+        std::unique_ptr<sql::ResultSet> res(pstmt->executeQuery());
+
+        // 4. Parcours du résultat
+        if (res->next()) {
+            compte.id = res->getInt("id");
+            // CORBA::string_dup permet d'allouer proprement la mémoire pour les chaînes CORBA
+            compte.nom = CORBA::string_dup(res->getString("nom").c_str());
+            compte.solde = res->getDouble("solde");
+        } else {
+            std::cerr << "[OlonaRepository] Aucun compte trouvé avec l'ID : " << id << std::endl;
+        }
+
+    } catch (sql::SQLException& e) {
+        std::cerr << "[OlonaRepository] Erreur SQL dans readById : " << e.what() << std::endl;
+    }
+
+    return compte;
 }
