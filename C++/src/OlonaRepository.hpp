@@ -7,10 +7,12 @@
 #include <mysql_driver.h>
 #include <mysql_connection.h>
 #include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 #include <cppconn/resultset.h>
 #include <cppconn/exception.h>
 
 #include "entity/Olona.hpp"
+#include "banque.hh"
 
 class OlonaRepository {
 public:
@@ -34,4 +36,6 @@ public:
     void setDatabase(const std::string& database);
 
     std::vector<Olona> readThem();
+    bool update(long id , double montant);
+    BanqueModule::Compte readById(long id);
 };
