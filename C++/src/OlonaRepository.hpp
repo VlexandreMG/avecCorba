@@ -37,5 +37,5 @@ public:
 
     std::vector<Olona> readThem();
     bool update(long id , double montant);
-    BanqueModule::Compte readById(long id);
+    Banque::Compte readById(long id);
 };

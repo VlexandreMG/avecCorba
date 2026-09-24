@@ -1,13 +1,22 @@
 #include "BanqueServiceImpl.hh"
 
-BanqueServiceImpl::BanqueServiceImpl() {}
-BanqueServiceImpl::~BanqueServiceImpl() {}
+BanqueServiceImpl::BanqueServiceImpl() {
 
-::CORBA::Boolean BanqueServiceImpl::faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) {
-    std::cout << "[SERVEUR C++] Id Compte : "<< idCompte << std::endl;
-    std::cout << "[SERVEUR C++] Montant : "<< montant << std::endl;
-    
-    
-    std::cout << "[SERVEUR C++] Depot effectue avec succes !" << std::endl;
-    return true;
+// Initialisation du repo MySQL 
+    olonaRepo.setHost("tcp://127.0.0.1:3306");
+    olonaRepo.setUser("root");
+    olonaRepo.setPassword("root"); // Remplace par ton mdp MySQL
+    olonaRepo.setDatabase("test_db");
+}
+
+Banque::Compte BanqueServiceImpl::faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) {
+    bool succes = olonaRepo.update(id, montant);
+
+    if (!succes) {
+        std::cout << "Echec de l'update dans la base" << std::endl;
+    }
+
+    Banque::Compte compte = olonaRepo.readById(id);
+
+    return compte;
 }
