@@ -1,8 +1,10 @@
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
-import BanqueModule.banqueService;
-import BanqueModule.banqueServiceHelper;
+import Banque.banqueService;
+import Banque.banqueServiceHelper;
+import Banque.Compte;
+import entity.CompteRepository;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,9 +21,24 @@ public class Main {
 
             System.out.println("[CLIENT JAVA] Connecté au serveur C++ !");
 
+            // CompteRepository 
+            CompteRepository cp = new CompteRepository();
+            cp.setCheminFichier("donnees.txt");
+            cp.setSeparateur(";");
+
+            // Données 
+            int idCompte = 1;
+            double montant = 500.0;
+
             // 4. Appeler la fonction C++
-            boolean resultat = service.faireDepot(1, 500.0);
-            System.out.println("[CLIENT JAVA] Résultat du dépôt : " + resultat);
+            Compte compteMaj = cp.getCompteFromCpp(service,idCompte,montant);
+
+            if (compteMaj != NULL) {
+                cp.enregistrerDepot(compteMaj,montant);
+                System.out.println("[Java Client] Traitement terminé avec succès.");
+            } else {
+                System.err.println("[Java Client] Échec du dépôt.");
+            }
 
         } catch (Exception e) {
             System.err.println("[ERREUR CLIENT JAVA] : " + e.getMessage());
