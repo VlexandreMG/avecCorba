@@ -28,7 +28,7 @@ public class Main {
 
             // Données 
             int idCompte = 1;
-            double montant = 500.0;
+            double montant = 600.0;
 
             // 4. Appeler la fonction C++
             Compte compteMaj = cp.getCompteFromCpp(service,idCompte,montant);

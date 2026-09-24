@@ -1,3 +1,5 @@
 1|Diallo
 2|Ranaivo
 3|Dupont1;Balou;500.0;500.0
+1;Balou;500.0;500.0
+1;Balou;500.0;500.0
