@@ -70,7 +70,7 @@ bool OlonaRepository::update(long id , double montant) {
         con->setSchema(database);
 
         // Création du Preparedstatement 
-        std::unique_ptr<sql::PreparedStatement> pstmt(con->prepareStatement("UPDATE compte SET solde = + ? WHERE id = ?"));
+        std::unique_ptr<sql::PreparedStatement> pstmt(con->prepareStatement("UPDATE compte SET solde = ? WHERE id = ?"));
 
         // On rempli avec 
         pstmt->setDouble(1,montant);
