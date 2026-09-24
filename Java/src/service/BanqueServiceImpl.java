@@ -1,9 +1,9 @@
 package service;
 
-import Banque.BanqueServicePOA;
+import Banque.banqueServicePOA;
 import Banque.Compte;
 
-public class BanqueServiceImpl extends BanqueServicePOA {
+public class BanqueServiceImpl extends banqueServicePOA {
 
     @Override
     public Compte faireDepot(int idCompte, double montant) {
