@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import Banque.Compte;
-import Banque.BanqueService;
+import Banque.banqueService;
 
 public class CompteRepository {
     String cheminFichier;
@@ -67,7 +67,7 @@ public class CompteRepository {
     //     return listCompte;
     // }
 
-    public Compte getCompteFromCpp (BanqueService serviceCorba, int id, double montant) {
+    public Compte getCompteFromCpp (banqueService serviceCorba, int id, double montant) {
         Compte compteMisAJour = null;
 
         try {
