@@ -136,11 +136,43 @@ public class CompteRepository {
                 }       
             }
 
-            return true 
+            return true;
         } catch (IOException e) {
             System.err.println("Il y a une erreur dans le update : " + e.getMessage());
             e.printStackTrace();
             return false;
         }     
+    }
+
+    public Compte selectCompte(int id) {
+        try (FileReader fileReader = new FileReader(this.cheminFichier);) {
+            BufferedReader reader = new BufferedReader(fileReader);
+
+            String line;
+            // Debut de la boucle 
+            while ((line = reader.readLine()) != null) {
+            // À chaque ligne , transforme en un objet et le met dans la liste 
+                if (!line.trim().isEmpty()) {
+                    String[] champs =  line.split(this.separateur);
+
+                    int idCompte  = Integer.parseInt(champs[0]);
+                    
+
+                    if (idCompte == id) {
+                        String nom = champs[1];
+                        double solde = Double.parseDouble(champs[2]);
+                        Compte vao = new Compte(id,nom,solde);
+                        return vao;
+                    }
+
+                }
+
+            }
+        } catch (IOException e) {
+            // Liberer de la mémoire 
+            e.printStackTrace();
+        }
+
+        return null;       
     }
 }
