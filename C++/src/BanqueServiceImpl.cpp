@@ -10,14 +10,14 @@ BanqueServiceImpl::BanqueServiceImpl() {
 }
 
 Banque::Compte* BanqueServiceImpl::faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) {
-    bool succes = olonaRepo.update(id, montant);
+    bool succes = olonaRepo.update(idCompte, montant);
 
     if (!succes) {
         std::cout << "Echec de l'update dans la base" << std::endl;
     }
 
     Banque::Compte* res = new Banque::Compte();
-    *res = olonaRepo.readById(id);
+    *res = olonaRepo.readById(idCompte);
 
     return res;
 }

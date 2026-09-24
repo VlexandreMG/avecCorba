@@ -87,9 +87,9 @@ bool OlonaRepository::update(long id , double montant) {
     }
 }
 
-BanqueModule::Compte OlonaRepository::readById(long id) {
+Banque::Compte OlonaRepository::readById(long id) {
     // Initialisation d'une structure Compte par défaut
-    BanqueModule::Compte compte;
+    Banque::Compte compte;
     compte.id = 0;
     compte.nom = CORBA::string_dup("");
     compte.solde = 0.0;
