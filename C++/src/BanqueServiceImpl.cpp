@@ -9,14 +9,15 @@ BanqueServiceImpl::BanqueServiceImpl() {
     olonaRepo.setDatabase("test_db");
 }
 
-Banque::Compte BanqueServiceImpl::faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) {
+Banque::Compte* BanqueServiceImpl::faireDepot(::CORBA::Long idCompte , ::CORBA::Double montant) {
     bool succes = olonaRepo.update(id, montant);
 
     if (!succes) {
         std::cout << "Echec de l'update dans la base" << std::endl;
     }
 
-    Banque::Compte compte = olonaRepo.readById(id);
+    Banque::Compte* res = new Banque::Compte();
+    *res = olonaRepo.readById(id);
 
-    return compte;
+    return res;
 }
